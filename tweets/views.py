@@ -1,9 +1,9 @@
 from django.shortcuts import render,HttpResponse
 from django.shortcuts import render
-from tweets.serializers import LikeSerializer, RetweetSerializer, TweetSerializer
+from tweets.serializers import CommentsSerializer, LikeSerializer, RetweetSerializer, TweetSerializer
 from django.shortcuts import render, HttpResponse
 from rest_framework import viewsets
-from .models import Like, Retweet, Tweet
+from .models import Comments, Like, Retweet, Tweet
 
 # Create your views here.
 
@@ -33,4 +33,13 @@ class RetweetViewSet(viewsets.ModelViewSet):
     """
     queryset = Retweet.objects.all()
     serializer_class = RetweetSerializer
+    # permission_classes = [permissions.IsAuthenticated]
+
+
+class CommentsViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows groups to be viewed or edited.
+    """
+    queryset = Comments.objects.all()
+    serializer_class = CommentsSerializer
     # permission_classes = [permissions.IsAuthenticated]
