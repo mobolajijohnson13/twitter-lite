@@ -8,10 +8,10 @@ class TweetSerializer(ModelSerializer):
     retweet = serializers.IntegerField(source = "get_num_of_retweets", read_only = True)
     comments = serializers.IntegerField(source = "get_num_of_comments", read_only = True)
 
-    def to_representation(self, instance):
-        data = super(TweetSerializer, self).to_representation(instance)
-        data.update({"text":"yeah"})
-        return data
+    # def to_representation(self, instance):
+    #     data = super(TweetSerializer, self).to_representation(instance)
+    #     data.update({"text":"yeah"})
+    #     return data
 
     class Meta:
         model = Tweet
@@ -33,4 +33,4 @@ class RetweetSerializer(ModelSerializer):
 class CommentsSerializer(ModelSerializer):
     class Meta:
         model = Comments
-        fields = ["tweet","user"]
+        fields = ["tweet","user", "text"]
