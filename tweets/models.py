@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+# from django.contrib.auth.models import AbstractUser
+from django.db import models
 # Create your models here.
 
 class Tweet(models.Model):
@@ -45,3 +47,6 @@ class Comments(models.Model):
     class Meta:
         unique_together = ["user", "text"]
     
+
+
+
