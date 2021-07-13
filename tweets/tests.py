@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
-from tweets.models import Comments, Tweet
+from tweets.models import Comments, Retweet, Tweet
 from django.db import models
 
 
@@ -45,22 +45,88 @@ class TweetTests(APITestCase):
     #         self.assertEqual(response_data['text'], tweet.text)
 
 
-    def test_get_one_tweet(self):
-                """
-                Ensure we can create a new tweet object.
-                """
+    # def test_get_one_tweet(self):
+    #             """
+    #             Ensure we can create a new tweet object.
+    #             """
             
-                user_instance = User.objects.create_user(username="lami", password="password123")#this is admin that create the tweet
-                tweet =Tweet.objects.create(text="this is a simple tweet", user=user_instance)#this is admin that create the tweet
+    #             user_instance = User.objects.create_user(username="lami", password="password123")#this is admin that create the tweet
+    #             tweet =Tweet.objects.create(text="this is a simple tweet", user=user_instance)#this is admin that create the tweet
 
-                url = reverse('tweet-list')
-                response = self.client.get(url)
-                response_data = response.json()
-                # print()
+    #             url = reverse('tweet-list')
+    #             response = self.client.get(url)
+    #             response_data = response.json()
+    #             # print()
 
-                self.assertEqual(response.status_code, status.HTTP_200_OK)
-                self.assertEqual(Tweet.objects.count(), 1)
-                self.assertEqual(response_data[0]['text'],tweet.text)
+    #             self.assertEqual(response.status_code, status.HTTP_200_OK)
+    #             self.assertEqual(Tweet.objects.count(), 1)
+    #             self.assertEqual(response_data[0]['text'],tweet.text)
+    
+
+    
+    #  def test_get_retweet(self):
+    #     """
+    #     Ensure we can create a new retweet object.
+    #     """
+    #     user = User.objects.create_user(username="lami", password="password123")
+    #     tweet = Tweet.objects.create(text="this is a simple tweet", user=user)
+
+    #     url = reverse('retweet-list')
+    #     data = {'tweet': tweet.id, "user": user.id}
+    #     response = self.client.get(url)
+    #     response_data = response.json()
+
+    #     self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+
+
+    #  def test_put_tweet(self):
+    #     """
+    #     Ensure we can create a new retweet object.
+    #     """
+    #     user = User.objects.create_user(username="lami", password="password123")
+    #     tweet = Tweet.objects.create(text="this is a simple tweet", user=user)
+
+    #     url = reverse('tweet-detail', kwargs={'pk': tweet.id})
+    #     data = {'tweet': tweet.id, "user": user.id,'text':'this is a simple tweet'}
+    #     response = self.client.put(url, data, format='json')
+    #     response_data = response.json()
+    #     print(response_data)
+        
+    #     self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+
+    #  def test_patch_tweet(self):
+    #     """
+    #     Ensure we can create a new retweet object.
+    #     """
+    #     user = User.objects.create_user(username="lami", password="password123")
+    #     tweet = Tweet.objects.create(text="this is a simple tweet", user=user)
+
+    #     url = reverse('tweet-detail', kwargs={'pk': tweet.id})
+    #     data = {'tweet': tweet.id, "user": user.id,'text':'this is a simple tweet'}
+    #     response = self.client.patch(url, data, format='json')
+    #     response_data = response.json()
+    #     print(response_data)
+        
+    #     self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_patch_retweet(self):
+        """
+        Ensure we can create a new retweet object.
+        """
+        user = User.objects.create_user(username="lami", password="password123")
+        tweet = Tweet.objects.create(text="this is a simple tweet", user=user)
+
+        url = reverse('tweet-detail', kwargs={'pk': tweet.id})
+        data = {'tweet': tweet.id, "user": user.id,'text':'this is a simple tweet'}
+        response = self.client.patch(url, data, format='json')
+        response_data = response.json()
+        print(response_data)
+        
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+
 
 
 #     def test_put_tweet(self):
