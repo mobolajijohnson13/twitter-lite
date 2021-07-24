@@ -382,3 +382,4 @@ class CommentsTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(Like.objects.count(), 1)  
+
