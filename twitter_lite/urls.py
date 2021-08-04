@@ -25,5 +25,7 @@ urlpatterns = [
     path('tweets/', include('tweets.urls')),
     # path('retweets/', include('retweet.urls')),
     path('api-auth/', include('rest_framework.urls')),    #this is from django rest framework site
+    path('accounts/', include('allauth.urls')),
     
 ]
+
